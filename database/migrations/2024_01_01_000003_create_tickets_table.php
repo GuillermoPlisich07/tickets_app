@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            // Uso el string en vez de enum por si se cambia el motor de db
             $table->string('status')->default('open');
             $table->timestamps();
         });

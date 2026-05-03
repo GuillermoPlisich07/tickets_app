@@ -14,7 +14,6 @@ return new class extends Migration
             $table->text('content');
             $table->string('author');
             $table->string('author_type');
-            // Para proteger el mensaje raiz
             $table->boolean('is_root')->default(false);
             $table->timestamps();
         });

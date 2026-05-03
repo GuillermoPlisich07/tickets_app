@@ -72,11 +72,10 @@ class TicketService
 
     public function updateStatus(Ticket $ticket, TicketStatus $status): Ticket
     {
-        // Aplica ? duda tecnica, si el ticket quiero que se cierre por completo hay que activarlo
-        // Pero si quiero que se cambie lo dejo asi
-//        if ($ticket->status->isClosed()) {
-//            throw new TicketClosedException();
-//        }
+        if ($ticket->status->isClosed()) {
+            throw new TicketClosedException();
+        }
+
         return $this->ticketRepository->updateStatus($ticket, $status);
     }
 
