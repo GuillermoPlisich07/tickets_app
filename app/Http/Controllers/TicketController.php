@@ -53,10 +53,12 @@ class TicketController extends Controller
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
-                required: ['title', 'description'],
+                required: ['title', 'content', 'author', 'author_type'],
                 properties: [
                     new OA\Property(property: 'title', type: 'string', example: 'Error en login'),
-                    new OA\Property(property: 'description', type: 'string', example: 'No puedo iniciar sesión'),
+                    new OA\Property(property: 'content', type: 'string', example: 'No puedo iniciar sesión'),
+                    new OA\Property(property: 'author', type: 'string', example: 'Juan Pérez'),
+                    new OA\Property(property: 'author_type', type: 'string', enum: ['customer', 'operator'], example: 'customer'),
                 ]
             )
         ),
@@ -73,7 +75,7 @@ class TicketController extends Controller
 
     #[OA\Patch(
         path: '/api/tickets/{id}',
-        summary: 'Editar título o descripción de un ticket',
+        summary: 'Editar título de un ticket',
         tags: ['Tickets'],
         parameters: [
             new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
@@ -81,9 +83,9 @@ class TicketController extends Controller
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
+                required: ['title'],
                 properties: [
                     new OA\Property(property: 'title', type: 'string', example: 'Nuevo título'),
-                    new OA\Property(property: 'description', type: 'string', example: 'Nueva descripción'),
                 ]
             )
         ),
@@ -111,7 +113,7 @@ class TicketController extends Controller
             content: new OA\JsonContent(
                 required: ['status'],
                 properties: [
-                    new OA\Property(property: 'status', type: 'string', enum: ['open', 'in_progress', 'closed'], example: 'in_progress'),
+                    new OA\Property(property: 'status', type: 'string', enum: ['open', 'operator_reply', 'customer_reply', 'closed'], example: 'operator_reply'),
                 ]
             )
         ),

@@ -34,17 +34,26 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "body",
-                                    "author"
+                                    "content",
+                                    "author",
+                                    "author_type"
                                 ],
                                 "properties": {
-                                    "body": {
+                                    "content": {
                                         "type": "string",
                                         "example": "Hola, necesito ayuda"
                                     },
                                     "author": {
                                         "type": "string",
-                                        "example": "usuario@example.com"
+                                        "example": "Juan Pérez"
+                                    },
+                                    "author_type": {
+                                        "type": "string",
+                                        "example": "customer",
+                                        "enum": [
+                                            "customer",
+                                            "operator"
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -129,10 +138,10 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "body"
+                                    "content"
                                 ],
                                 "properties": {
-                                    "body": {
+                                    "content": {
                                         "type": "string",
                                         "example": "Mensaje actualizado"
                                     }
@@ -181,16 +190,30 @@
                             "schema": {
                                 "required": [
                                     "title",
-                                    "description"
+                                    "content",
+                                    "author",
+                                    "author_type"
                                 ],
                                 "properties": {
                                     "title": {
                                         "type": "string",
                                         "example": "Error en login"
                                     },
-                                    "description": {
+                                    "content": {
                                         "type": "string",
                                         "example": "No puedo iniciar sesión"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Juan Pérez"
+                                    },
+                                    "author_type": {
+                                        "type": "string",
+                                        "example": "customer",
+                                        "enum": [
+                                            "customer",
+                                            "operator"
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -280,14 +303,13 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "title"
+                                ],
                                 "properties": {
                                     "title": {
                                         "type": "string",
                                         "example": "Nuevo título"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Nueva descripción"
                                     }
                                 },
                                 "type": "object"
@@ -336,10 +358,11 @@
                                 "properties": {
                                     "status": {
                                         "type": "string",
-                                        "example": "in_progress",
+                                        "example": "operator_reply",
                                         "enum": [
                                             "open",
-                                            "in_progress",
+                                            "operator_reply",
+                                            "customer_reply",
                                             "closed"
                                         ]
                                     }

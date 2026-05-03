@@ -25,10 +25,11 @@ class MessageController extends Controller
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
-                required: ['body', 'author'],
+                required: ['content', 'author', 'author_type'],
                 properties: [
-                    new OA\Property(property: 'body', type: 'string', example: 'Hola, necesito ayuda'),
-                    new OA\Property(property: 'author', type: 'string', example: 'usuario@example.com'),
+                    new OA\Property(property: 'content', type: 'string', example: 'Hola, necesito ayuda'),
+                    new OA\Property(property: 'author', type: 'string', example: 'Juan Pérez'),
+                    new OA\Property(property: 'author_type', type: 'string', enum: ['customer', 'operator'], example: 'customer'),
                 ]
             )
         ),
@@ -55,9 +56,9 @@ class MessageController extends Controller
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
-                required: ['body'],
+                required: ['content'],
                 properties: [
-                    new OA\Property(property: 'body', type: 'string', example: 'Mensaje actualizado'),
+                    new OA\Property(property: 'content', type: 'string', example: 'Mensaje actualizado'),
                 ]
             )
         ),

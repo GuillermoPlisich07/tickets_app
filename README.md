@@ -64,6 +64,9 @@ Todo esto queda expuesto en `http://localhost:8000/api`
 
 -  `status`: `open` | `operator_reply` | `customer_reply` | `closed`
 
-## La documentación de los endpoints esta en `http://localhost:8000/api/documentation`
 
+
+
+## La documentación de los endpoints esta en `http://localhost:8000/api/documentation`
+## El archivo `App-ticket.postman_collection.json` sirve para importar la pruebas a postman!
 
