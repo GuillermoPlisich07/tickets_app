@@ -1,0 +1,376 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Tickets API",
+        "description": "API REST para gestión de tickets de soporte",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/tickets/{ticket}/messages": {
+            "post": {
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "Agregar un mensaje a un ticket",
+                "operationId": "68d601f01b8a354302c0fda10d5a6c27",
+                "parameters": [
+                    {
+                        "name": "ticket",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "body",
+                                    "author"
+                                ],
+                                "properties": {
+                                    "body": {
+                                        "type": "string",
+                                        "example": "Hola, necesito ayuda"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "usuario@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Mensaje creado"
+                    },
+                    "422": {
+                        "description": "Ticket cerrado o validación fallida"
+                    },
+                    "404": {
+                        "description": "Ticket no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/tickets/{ticket}/messages/{message}": {
+            "delete": {
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "Eliminar un mensaje",
+                "operationId": "a906e2bb262ffb1b92cd2e665ed38afb",
+                "parameters": [
+                    {
+                        "name": "ticket",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Mensaje eliminado"
+                    },
+                    "404": {
+                        "description": "Mensaje no encontrado"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "Editar un mensaje",
+                "operationId": "562772f838179e97a9df190fca37a3ed",
+                "parameters": [
+                    {
+                        "name": "ticket",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "message",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "body"
+                                ],
+                                "properties": {
+                                    "body": {
+                                        "type": "string",
+                                        "example": "Mensaje actualizado"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mensaje actualizado"
+                    },
+                    "422": {
+                        "description": "Ticket cerrado o validación fallida"
+                    },
+                    "404": {
+                        "description": "Mensaje no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/tickets": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Listar todos los tickets",
+                "operationId": "0082053c3590628e674a11ec0d1466e6",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tickets"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Crear un ticket",
+                "operationId": "93882881cca9046d8c6ddbbab7309b4b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Error en login"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "No puedo iniciar sesión"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ticket creado"
+                    },
+                    "422": {
+                        "description": "Validación fallida"
+                    }
+                }
+            }
+        },
+        "/api/tickets/{id}": {
+            "get": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Ver un ticket con sus mensajes",
+                "operationId": "62091a82e5103c19191c4c1ebd30ec6f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ticket encontrado"
+                    },
+                    "404": {
+                        "description": "Ticket no encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Eliminar un ticket",
+                "operationId": "c37b65ae6ff3ffa8c9e0c14ea4d6a9f7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ticket eliminado"
+                    },
+                    "404": {
+                        "description": "Ticket no encontrado"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Editar título o descripción de un ticket",
+                "operationId": "682a7b594e35de8d14fbc0de2abbc30b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Nuevo título"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Nueva descripción"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ticket actualizado"
+                    },
+                    "422": {
+                        "description": "Ticket cerrado o validación fallida"
+                    },
+                    "404": {
+                        "description": "Ticket no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/tickets/{id}/status": {
+            "patch": {
+                "tags": [
+                    "Tickets"
+                ],
+                "summary": "Cambiar el estado de un ticket",
+                "operationId": "ce188cbaf78b699383a6e3c95780ad1d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "status"
+                                ],
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": "in_progress",
+                                        "enum": [
+                                            "open",
+                                            "in_progress",
+                                            "closed"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estado actualizado"
+                    },
+                    "422": {
+                        "description": "Transición de estado inválida o ticket cerrado"
+                    },
+                    "404": {
+                        "description": "Ticket no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Messages",
+            "description": "Messages"
+        },
+        {
+            "name": "Tickets",
+            "description": "Tickets"
+        }
+    ]
+}

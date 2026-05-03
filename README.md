@@ -7,6 +7,8 @@ Opte por una Arquitectura en capas o Layers Architecture, en lugar de un MVC o H
 Y una aclaracion sobre el estado cerrado, una vez que un ticket pasa a closed, no es posible cambiar su estado, editar su título ni agregar o modificar mensajes. 
 Esta restricción es va un poco mas de lo que la documentacion exige, pero lo considere coherente con lo de "cierre definitivo".
 
+A lo ultimo decidi agregar Swagger para facilitar la doc de los endpoints.
+
 ## Requisitos
 - Docker y docker compose
 
@@ -30,9 +32,13 @@ docker exec tickets_app composer install
 docker exec tickets_app php artisan key:generate
 
 6. Levantar las migraciones
-docker exec tickets_app php artisan migrate 
+docker exec tickets_app php artisan migrate
+
+7. Generar la documentación Swagger
+docker exec tickets_app php artisan l5-swagger:generate
 ```
-Todo esto queda expuesto en `http://localhost:8080/api`
+Todo esto queda expuesto en `http://localhost:8000/api`
+
 
 ## Endpoints
 ### Tickets
@@ -57,5 +63,7 @@ Todo esto queda expuesto en `http://localhost:8080/api`
 -  `author_type`: `customer` | `operator`
 
 -  `status`: `open` | `operator_reply` | `customer_reply` | `closed`
+
+## La documentación de los endpoints esta en `http://localhost:8000/api/documentation`
 
 
