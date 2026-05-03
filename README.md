@@ -1,0 +1,1 @@
+Decisiones de la Arquitectura me base en Layer, por la simplicidad, podria haber elegido una hexagonal pero creo que no era necesario para una prueba de este estilo, y el MVC no me gusta mucho por tema de separaciones de responsabilidad. 
